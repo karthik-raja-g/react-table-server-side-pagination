@@ -21,12 +21,21 @@ export const formatRowData = (rawData) =>
   }));
 
 export const getData = async (pageNo = 1) => {
-    const response = await fetch(
-      `https://api.instantwebtools.net/v1/passenger?page=${pageNo}&size=15`
-    );
-    const data = await response.json()
-    return data
-//   fetch(
-//     `https://api.instantwebtools.net/v1/passenger?page=${pageNo}&size=10`
-//   ).then((res) => res.json().then((data) => console.log(data)));
+  const response = await fetch(
+    `https://api.instantwebtools.net/v1/passenger?page=${pageNo}&size=15`
+  );
+  return await response.json();
 };
+
+export const getDataFromSearch = async query => {
+  if(!query) return [];
+  const pageNo = Math.floor((Math.random() * 10) + 1);
+  // const response = await fetch(
+  //   `https://<API_THAT_SUPPORTS_QUERY>?airline=${query}`
+  // );
+  // return await response.json();
+  const response = await fetch(
+    `https://api.instantwebtools.net/v1/passenger?page=${pageNo}&size=15`
+  );
+  return await response.json();
+}
