@@ -30,6 +30,7 @@ const HomePage = () => {
   return (
     <div>
       <p>Total Passengers: {pageData.totalPassengers || "Loading..."}</p>
+      <button onClick={() => setCurrentPage(1)}>Reset</button>
       <div style={{ height: "600px" }}>
         <Table
           columns={columns}
@@ -41,6 +42,7 @@ const HomePage = () => {
         totalRows={pageData.totalPassengers}
         pageChangeHandler={setCurrentPage}
         rowsPerPage={15}
+        currentPage={currentPage}
       />
     </div>
   );

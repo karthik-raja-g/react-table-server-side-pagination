@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 
-const Pagination = ({ pageChangeHandler, totalRows, rowsPerPage }) => {
+const Pagination = ({
+  pageChangeHandler,
+  totalRows,
+  rowsPerPage,
+  currentPage,
+}) => {
   // Calculating max number of pages
   const noOfPages = Math.ceil(totalRows / rowsPerPage);
 
@@ -10,7 +15,7 @@ const Pagination = ({ pageChangeHandler, totalRows, rowsPerPage }) => {
 
   // State variable to hold the current page. This value is
   // passed to the callback provided by the parent
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
   // Navigation arrows enable/disable state
   const [canGoBack, setCanGoBack] = useState(false);
@@ -22,9 +27,9 @@ const Pagination = ({ pageChangeHandler, totalRows, rowsPerPage }) => {
   const [pageLastRecord, setPageLastRecord] = useState(rowsPerPage);
 
   // Onclick handlers for the butons
-  const onNextPage = () => setCurrentPage(currentPage + 1);
-  const onPrevPage = () => setCurrentPage(currentPage - 1);
-  const onPageSelect = (pageNo) => setCurrentPage(pageNo);
+  const onNextPage = () => pageChangeHandler(currentPage + 1);
+  const onPrevPage = () => pageChangeHandler(currentPage - 1);
+  const onPageSelect = (pageNo) => pageChangeHandler(pageNo);
 
   // Disable previous and next buttons in the first and last page
   // respectively
@@ -46,7 +51,7 @@ const Pagination = ({ pageChangeHandler, totalRows, rowsPerPage }) => {
     const skipFactor = (currentPage - 1) * rowsPerPage;
     // Some APIs require skip for paginaiton. If needed use that instead
     // pageChangeHandler(skipFactor);
-    pageChangeHandler(currentPage)
+    // pageChangeHandler(currentPage)
     setPageFirstRecord(skipFactor + 1);
   }, [currentPage]);
 
